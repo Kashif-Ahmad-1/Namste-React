@@ -6,7 +6,27 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="root"></div>
 </body>
-<Script src="App.js"></Script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+
+<!-- React function declaration of id="root" -->
+<script>
+    const heading = React.createElement("h1",{},"Namaste React to Everyone");
+    const root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(heading);
+
+    
+</script>
+
+
+<!-- javascript Method of declaring a function -->
+<!-- <script>
+    const heading = document.createElement("h1")
+    heading.innerHTML = "Welcome to javascript"
+    root = document.getElementById("root")
+    root.appendChild(heading)
+</script> -->
 </html>

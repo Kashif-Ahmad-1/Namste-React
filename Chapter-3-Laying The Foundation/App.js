@@ -49,12 +49,14 @@ const number = 10000;
 const HeadingComponent = () => {
   return (
     <div id="container">
-      {/* <Titles />   */}
+      <Titles />  
+      {Titles() } 
       {/* all code of title comes here */}
       {/* <h2>{number}</h2> */}
       {/* Any part of javadcript works here */}
 
-      {title}
+      {/* {title} */}
+
       <h1 className="head" tabIndex="5">
         Namaste React using Functional Component
       </h1>

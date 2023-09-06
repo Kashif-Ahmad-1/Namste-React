@@ -11,11 +11,11 @@ const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
 // if code contains only one line then dont wrap with this bracket
 
 
-// const jsxHeading = (
-//   <h1 className="head" tabIndex="5">
-//     Namaste React using JSX
-//   </h1>
-// ); 
+const jsxHeading = (
+  <h1 className="head" tabIndex="5">
+    Namaste React using JSX
+  </h1>
+); 
 
 
 // Manadatory to use () for multiple line
@@ -26,19 +26,35 @@ const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
 // Class Based Component - OLD
 // Functional Component - New
 
-const Title = () => (
+const Titles = () => (
   <h1 className="head" tabIndex="5">
     Namaste React using JSX
   </h1>
 ); 
 
+// it will pass through <Title />
 
+const ele = <span>React element</span>
+
+const title = (
+  <h1 className="head" tabIndex="5">
+    {ele}  Namaste React using JSX
+  </h1>
+); 
+
+// it will pass through {title}
+
+const number = 10000;
 // React Functional Component
 const HeadingComponent = () => {
   return (
     <div id="container">
-      <Title />      
-       {/* all code of title comes here */}
+      {/* <Titles />   */}
+      {/* all code of title comes here */}
+      {/* <h2>{number}</h2> */}
+      {/* Any part of javadcript works here */}
+
+      {title}
       <h1 className="head" tabIndex="5">
         Namaste React using Functional Component
       </h1>

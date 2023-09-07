@@ -21,17 +21,18 @@ const Header = () => {
 };
 
 
-const Restaurantcard = () =>{
+const Restaurantcard = (props) =>{
+  console.log(props)
   return (
     <div className="res-card" style = {{ backgroundColor: "#f0f0f0"}}>
       
       <img
         className="res-logo" alt="" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/cfe5a6b2c186e42811f595e7ebfd7331"
       />
-      <h3>Kashif Food</h3>
-      <h4>Biryani, Burger, North Indian, Asian</h4>
-      <h4>4.4 stars</h4>
-      <h4>38 Minutes</h4>
+      <h3>{props.resName}</h3>
+      <h4>{props.cuisine}</h4>
+      <h4>{props.rating}</h4>
+      <h4>{props.time}</h4>
     </div>
   )
 }
@@ -41,18 +42,21 @@ const Body = () =>{
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
-        <Restaurantcard />
+        {/* For dynamic restuarant card we used Props */}
+        <Restaurantcard 
+        resName = "Kashif Food"
+        cuisine = "Biryani, Burger, North Indian, Asian"
+        rating = "4.4"
+        time = "38 Minutes"
+        />
+
+        <Restaurantcard 
+        resName = "KFC"
+        cuisine = "Burger, Fast Food"
+        rating = "4.4"
+        time = "30 Minutes"
+        />
+      
         
       </div>
     </div>

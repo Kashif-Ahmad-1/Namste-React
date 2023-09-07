@@ -22,17 +22,22 @@ const Header = () => {
 
 
 const Restaurantcard = (props) =>{
-  console.log(props)
+// Destructuring methdos
+const {resName, cuisine, rating, time} = props;
+
   return (
     <div className="res-card" style = {{ backgroundColor: "#f0f0f0"}}>
       
       <img
         className="res-logo" alt="" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/cfe5a6b2c186e42811f595e7ebfd7331"
       />
-      <h3>{props.resName}</h3>
-      <h4>{props.cuisine}</h4>
-      <h4>{props.rating}</h4>
-      <h4>{props.time}</h4>
+
+      {/* after destructuring no needs to write props just direct wrote name */}
+
+      <h3>{resName}</h3> 
+      <h4>{cuisine}</h4>
+      <h4>{rating}</h4>
+      <h4>{time}</h4>
     </div>
   )
 }

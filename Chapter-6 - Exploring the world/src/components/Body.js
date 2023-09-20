@@ -13,10 +13,11 @@ useEffect(()=>{
 
 const fetchData = async () => {
   const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&collection=83667');
+  
   const json = await data.json();
   console.log("apiData", json);
  
-  setListofRes(json.data.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+  setListofRes(json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 }
 console.log("ResList", resList);
 
@@ -28,7 +29,7 @@ console.log("ResList", resList);
           onClick={() => {
             
 
-           const filteredList = ListofRes.filter((res)=> res.data.avgRating > 4);
+           const filteredList = ListofRes.filter((res)=> res.info.avgRating > 4);
            setListofRes(filteredList)
           }}
         >
@@ -37,7 +38,7 @@ console.log("ResList", resList);
       </div>
       <div className="res-container">
         {ListofRes.map((restaurant) => (
-          <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
     </div>

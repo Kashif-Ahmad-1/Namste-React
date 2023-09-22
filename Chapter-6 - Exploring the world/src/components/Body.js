@@ -1,11 +1,14 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
-import resList from "../utils/mockData";
+// import resList from "../utils/mockData";
+import Shimmer from "./ShimmerUi";
 
 const Body = () => {
 
 
-const [ListofRes, setListofRes] = useState(resList)
+// const [ListofRes, setListofRes] = useState(resList) // this used for mock data
+
+const [ListofRes, setListofRes] = useState([])
 useEffect(()=>{
   
   fetchData();
@@ -19,8 +22,13 @@ const fetchData = async () => {
  
   setListofRes(json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 }
-console.log("ResList", resList);
+// console.log("ResList", resList);
 
+
+// shimmer Ui
+if(ListofRes.length===0){
+  return <Shimmer />
+}
   return (
     <div className="body">
       <div className="filter">
@@ -36,6 +44,8 @@ console.log("ResList", resList);
           Top rated Restaurant
         </button>
       </div>
+
+      
       <div className="res-container">
         {ListofRes.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />

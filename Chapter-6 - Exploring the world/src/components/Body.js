@@ -7,6 +7,8 @@ const Body = () => {
   // const [ListofRes, setListofRes] = useState(resList) // this used for mock data
 
   const [ListofRes, setListofRes] = useState([]);
+  const [FilteredRestaurant, setFilteredRestaurant] = useState([]);
+
   const [searchText, setsearchText] = useState("");
 
   // whenever state variable update, react triggers a reconciliation cycle ( re-render the component)
@@ -26,6 +28,9 @@ const Body = () => {
     console.log("apiData", json);
 
     setListofRes(
+      json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurant(
       json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
@@ -50,10 +55,10 @@ const Body = () => {
           <button
             onClick={() => {
               console.log(searchText);
-              const filterRestaaurant = ListofRes.filter((res) =>
+              const filteredRestaurant = ListofRes.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
-              setListofRes(filterRestaaurant);
+              setFilteredRestaurant(filteredRestaurant);
             }}
           >
             Search
@@ -73,7 +78,7 @@ const Body = () => {
       </div>
 
       <div className="res-container">
-        {ListofRes.map((restaurant) => (
+        {FilteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>

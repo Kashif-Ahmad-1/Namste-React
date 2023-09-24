@@ -4,48 +4,74 @@ import { useState, useEffect } from "react";
 import Shimmer from "./ShimmerUi";
 
 const Body = () => {
+  // const [ListofRes, setListofRes] = useState(resList) // this used for mock data
 
+  const [ListofRes, setListofRes] = useState([]);
+  const [searchText, setsearchText] = useState("");
 
-// const [ListofRes, setListofRes] = useState(resList) // this used for mock data
+  // whenever state variable update, react triggers a reconciliation cycle ( re-render the component)
 
-const [ListofRes, setListofRes] = useState([])
-useEffect(()=>{
-  
-  fetchData();
-}, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-const fetchData = async () => {
-  const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&collection=83667');
-  
-  const json = await data.json();
-  console.log("apiData", json);
- 
-  setListofRes(json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-}
-// console.log("ResList", resList);
+  const fetchData = async () => {
+    // const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&collection=83667');
 
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.3412041&lng=82.99821510000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    ); // varanasi swiggy api
 
-// shimmer Ui
-if(ListofRes.length===0){
-  return <Shimmer />
-}
+    const json = await data.json();
+    console.log("apiData", json);
+
+    setListofRes(
+      json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  };
+  // console.log("ResList", resList);
+
+  // shimmer Ui
+  if (ListofRes.length === 0) {
+    return <Shimmer />;
+  }
   return (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setsearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              console.log(searchText);
+              const filterRestaaurant = ListofRes.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+              setListofRes(filterRestaaurant);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
-            
-
-           const filteredList = ListofRes.filter((res)=> res.info.avgRating > 4);
-           setListofRes(filteredList)
+            const filteredList = ListofRes.filter(
+              (res) => res.info.avgRating > 4
+            );
+            setListofRes(filteredList);
           }}
         >
           Top rated Restaurant
         </button>
       </div>
 
-      
       <div className="res-container">
         {ListofRes.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
